@@ -29,12 +29,13 @@ def sign_up():
             flash('Email is already in use.' , category='error')
         elif username_exists:
             flash('Username is already in use.' , category='error')
+        elif len(username) < 2:
+            flash('Username is too short.' , category='error')
         elif password1 != password2:
             flash('Passwords do not match!' , category='error')
         elif len(password1) < 8:
             flash('Password is too short.' , category='error')
-        elif len(username) < 2:
-            flash('Username is too short.' , category='error')
+        
         elif len(email) < 4:
             flash('Email is not valid.' , category='error')
         else:
