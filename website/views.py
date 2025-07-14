@@ -8,3 +8,8 @@ views = Blueprint("views", __name__)
 @views.route("/home")
 def home(): 
     return render_template("home.html", user=current_user)
+
+@views.route("/track-expenses", methods=['GET', 'POST'])
+@login_required
+def track_expenses(): 
+    return render_template("track_expenses.html", user=current_user)

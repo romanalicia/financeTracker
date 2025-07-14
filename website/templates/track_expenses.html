@@ -1,0 +1,22 @@
+<!-- page extends to template.html -->
+{% extends "template.html" %} {% block title %} Track Expenses {% endblock %}
+
+<!-- login page content -->
+{% block content %} 
+<h1>Track Your Expenses</h1>
+
+    <form method="POST">
+        <!-- expense tracker title form -->
+         <label for="title">Title</label>
+         <input type="text" id="title" name="title" class="form-control" placeholder="Track Expenses"/>
+         <br>
+         <!-- track expenses text area -->
+          <textarea name="content" id="conetent" class="form-control"></textarea>
+    </form>
+    <br> 
+    <!-- submit button -->
+    <div align="center">
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+    </div>
+    
+{% endblock %}
