@@ -13,3 +13,4 @@ def home():
 @login_required
 def track_expenses(): 
     return render_template("track_expenses.html", user=current_user)
+
