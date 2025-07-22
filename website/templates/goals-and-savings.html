@@ -3,6 +3,47 @@
 
 <!-- login page content -->
 {% block content %}
-<h1>Goals/Savings</h1>
+
+<body>
+  <h1>Your Financial Goals</h1>
+
+  <button
+    class="btn btn-primary"
+    onclick="document.getElementById('goalForm').style.display='block'"
+  >
+    Make a New Goal
+  </button>
+
+  <form id="goalForm">
+    <label for="title">Goal Title<span style="color: red">*</span></label>
+    <input type="text" id="title" name="title" required />
+
+    <label for="amount">Amount ($)<span style="color: red">*</span></label>
+    <input type="number" id="amount" name="amount" required />
+
+    <label for="goalDate">Goal Date<span style="color: red">*</span></label>
+    <input type="date" id="goalDate" name="goalDate" required />
+
+    <script>
+      // Get today's date + 1 day
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+
+      // Format as YYYY-MM-DD
+      const yyyy = tomorrow.getFullYear();
+      const mm = String(tomorrow.getMonth() + 1).padStart(2, "0"); // Months start at 0
+      const dd = String(tomorrow.getDate()).padStart(2, "0");
+      const minDate = `${yyyy}-${mm}-${dd}`;
+
+      // Set it as the minimum date
+      document.getElementById("goalDate").min = minDate;
+    </script>
+
+    <label for="description">Description (optional)</label>
+    <textarea id="description" name="description" rows="3"></textarea>
+
+    <button class="btn btn-primary" type="submit">Submit Goal</button>
+  </form>
+</body>
 
 {% endblock %}

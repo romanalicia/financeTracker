@@ -16,11 +16,18 @@
       crossorigin="anonymous"
     />
     <title>{% block title %} {% endblock %} - Stack'd</title>
+    <link rel="icon" type="image/x-icon" href="/static/stackd-logo-v3.png" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Logo goes here</a>
+        <a class="navbar-brand" href="/home">
+          <img
+            class="logo"
+            src="/static/stackd-logo-v3.png"
+            alt="Stack'd Logo"
+          />
+        </a>
         <button
           class="navbar-toggler"
           type="button"
