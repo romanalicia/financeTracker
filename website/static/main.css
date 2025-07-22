@@ -36,3 +36,7 @@ textarea {
 .logo {
   width: 100px;
 }
+
+.btn:hover {
+  background-color: red !important;
+}
