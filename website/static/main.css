@@ -37,10 +37,19 @@ textarea {
   width: 100px;
 }
 
-.btn{
+.btn-primary{
   background-color: #cbf5dd;
+  border-color: #b1f8d0;
 }
 
-.btn:hover {
-  background-color: red !important;
+.btn:hover{
+  background-color: #cbf5dd;
+  border-color: #b1f8d0;
+  color: grey;
+}
+
+.btn {
+  background-color: grey;
+  border-color: rgb(55, 55, 55);
+  color:#cbf5dd
 }
