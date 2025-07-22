@@ -37,6 +37,10 @@ textarea {
   width: 100px;
 }
 
+.btn{
+  background-color: #cbf5dd;
+}
+
 .btn:hover {
   background-color: red !important;
 }
