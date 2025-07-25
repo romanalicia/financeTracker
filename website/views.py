@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 
 views = Blueprint("views", __name__)
@@ -19,4 +19,11 @@ def track_expenses():
 @views.route("/goals-and-savings", methods=['GET', 'POST'])
 @login_required
 def goals_and_expenses():
+    if request.method == "POST":
+        title = request.form.get('title')
+        description = request.form.get('description')
+
+    if not title:
+        flash('Title cannot be empty')
+
     return render_template("goals-and-savings.html", user=current_user)

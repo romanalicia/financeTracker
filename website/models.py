@@ -21,7 +21,7 @@ class Goals(db.Model, UserMixin):
     title = db.Column(db.String(150), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     goalDate = db.Column(db.Date, nullable=False)
-    content = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text, nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey(
         'user.id', ondelete="CASCADE"), nullable=False)
