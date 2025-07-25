@@ -1,19 +1,19 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_user, logout_user, login_required, current_user 
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from . import db 
+from . import db
 
-from .models import User 
+from .models import User
 
 auth = Blueprint("auth", __name__)
 
 
 # sign-up route
-@auth.route("/sign-up", methods=['GET','POST'])
+@auth.route("/sign-up", methods=['GET', 'POST'])
 # sign up function
 # returns sign up page
-def sign_up():  
+def sign_up():
     # signup function
     # returns signup page
     if request.method == 'POST':
@@ -26,31 +26,32 @@ def sign_up():
         username_exists = User.query.filter_by(username=username).first()
         # validation of password, username and email
         if email_exists:
-            flash('Email is already in use.' , category='error')
+            flash('Email is already in use.', category='error')
         elif username_exists:
-            flash('Username is already in use.' , category='error')
+            flash('Username is already in use.', category='error')
         elif len(username) < 2:
-            flash('Username is too short.' , category='error')
+            flash('Username is too short.', category='error')
         elif password1 != password2:
-            flash('Passwords do not match!' , category='error')
+            flash('Passwords do not match!', category='error')
         elif len(password1) < 8:
-            flash('Password is too short.' , category='error')
-        
+            flash('Password is too short.', category='error')
+
         elif len(email) < 4:
-            flash('Email is not valid.' , category='error')
+            flash('Email is not valid.', category='error')
         else:
-            new_user = User(email=email, username=username, password=generate_password_hash(password1, method='scrypt:32768:8:1'))
+            new_user = User(email=email, username=username, password=generate_password_hash(
+                password1, method='scrypt:32768:8:1'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Your accout has been created!', category= 'success')
+            flash('Your accout has been created!', category='success')
             return redirect(url_for('views.home'))
-        
+
     return render_template("sign_up.html", user=current_user)
 
 
 # login route
-@auth.route("/login", methods=['GET','POST'])
+@auth.route("/login", methods=['GET', 'POST'])
 # login function
 # returns login page
 def login():
@@ -58,7 +59,7 @@ def login():
     if request.method == 'POST':
         email = request.form.get("email")
         password = request.form.get("password")
-        # queries database to recieve user information using email address
+        # queries database to receive user information using email address
         user = User.query.filter_by(email=email).first()
         # checks email and password
         if user:
@@ -74,10 +75,11 @@ def login():
         else:
             flash("Email does not exist!", category="error")
 
-
     return render_template("login.html", user=current_user)
 
 # logout route
+
+
 @auth.route("/logout")
 @login_required
 # logout function
