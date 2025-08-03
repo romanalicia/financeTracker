@@ -21,8 +21,8 @@
     <label for="amount">Amount ($)<span style="color: red">*</span></label>
     <input type="number" id="amount" name="amount" required />
 
-    <label for="goalDate">Goal Date<span style="color: red">*</span></label>
-    <input type="date" id="goalDate" name="goalDate" required />
+    <label for="goal_date">Goal Date<span style="color: red">*</span></label>
+    <input type="date" id="goal_date" name="goal_date" required />
 
     <script>
       // Get today's date + 1 day
@@ -36,7 +36,7 @@
       const minDate = `${yyyy}-${mm}-${dd}`;
 
       // Set it as the minimum date
-      document.getElementById("goalDate").min = minDate;
+      document.getElementById("goal_date").min = minDate;
     </script>
 
     <label for="description">Description (optional)</label>
@@ -63,6 +63,9 @@
       </div>
       <div class="card-body">
         <div class="card-text">{{goals.amount}}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-text">{{goals.goal_date}}</div>
       </div>
       <div class="card-body">
         <div class="card-text">{{goals.description}}</div>

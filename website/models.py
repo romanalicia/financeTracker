@@ -20,7 +20,7 @@ class Goals(db.Model, UserMixin):
     # nullable=False means it can't be empty
     title = db.Column(db.String(150), nullable=False)
     amount = db.Column(db.Float, nullable=False)
-    # goal_date = db.Column(db.Date, nullable=False)
+    goal_date = db.Column(db.Date, nullable=True)
     description = db.Column(db.Text)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey(
