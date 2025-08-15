@@ -51,3 +51,4 @@ def goals_and_savings():
 
     author_goals = Goals.query.filter_by(author=current_user.id).all()
     return render_template("goals-and-savings.html", user=current_user, goals=author_goals)
+
