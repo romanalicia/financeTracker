@@ -1,12 +1,12 @@
-# models.py
-# This file defines the database models for the application, including User, Goals, and Expense.
+"""This file defines database models including User, Goals, and Expense."""
 from . import db
 from sqlalchemy.sql import func
 from flask_login import UserMixin
 
 
 class User(db.Model, UserMixin):
-    # database model for user
+    """Database model for users."""
+
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
     username = db.Column(db.String(150), unique=True)
@@ -16,7 +16,8 @@ class User(db.Model, UserMixin):
 
 
 class Goals(db.Model, UserMixin):
-    # database model for goals/savings
+    """Database model for goals/savings."""
+
     id = db.Column(db.Integer, primary_key=True)
     # nullable=False means it can't be empty
     title = db.Column(db.String(150), nullable=False)
@@ -29,7 +30,8 @@ class Goals(db.Model, UserMixin):
 
 
 class Expense(db.Model):
-    # database model for expenses
+    """Database model for expenses."""
+
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(50), nullable=False)
     amount = db.Column(db.Numeric(10, 2), nullable=False)

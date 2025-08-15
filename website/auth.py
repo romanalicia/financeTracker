@@ -1,3 +1,6 @@
+""" auth.py
+This file handles user authentication, including sign-up, login, and logout functionality.
+It uses Flask-Login for session management and SQLAlchemy for database interactions."""
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash

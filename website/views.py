@@ -1,6 +1,4 @@
-# views.py
-# This file handles the main application routes and logic for tracking expenses and managing goals.
-# It includes routes for viewing the home page, tracking expenses, managing goals, and deleting entries.
+"""Routes + logic for tracking expenses & managing goals."""
 from flask import Blueprint, render_template, request, flash, redirect, url_for, abort
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import Goals, Expense
@@ -13,14 +11,14 @@ views = Blueprint("views", __name__)
 @views.route("/")
 @views.route("/home")
 def home():
-    # Home route
+    """Home route."""
     return render_template("home.html", user=current_user)
 
 
 @views.route("/track-expenses", methods=['GET', 'POST'])
 @login_required
 def track_expenses():
-    # Track expenses route
+    """Track expenses route."""
     if request.method == 'POST':
         category = request.form.get('category')
         amount = request.form.get('amount')
@@ -61,7 +59,7 @@ def track_expenses():
 @views.route("/delete-expense/<int:expense_id>", methods=['POST'])
 @login_required
 def delete_expense(expense_id):
-    # Delete an expense
+    """Delete an expense."""
     expense = Expense.query.get_or_404(expense_id)
 
     # Only the owner can delete
@@ -77,7 +75,7 @@ def delete_expense(expense_id):
 @views.route("/goals-and-savings", methods=['GET', 'POST'])
 @login_required
 def goals_and_savings():
-    # Goals and savings route
+    """Goals and savings route."""
     if request.method == "POST":
         title = request.form.get('title')
         amount = request.form.get('amount')
@@ -112,7 +110,7 @@ def goals_and_savings():
 @views.route("/delete-goal/<int:goal_id>", methods=['POST'])
 @login_required
 def delete_goal(goal_id):
-    # Delete a goal
+    """Delete a goal."""
     goal = Goals.query.get_or_404(goal_id)
 
     # Only the owner can delete the goal
