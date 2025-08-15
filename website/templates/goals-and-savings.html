@@ -57,6 +57,13 @@
         <a href="/goals-and-savings/{{goals.user.username}}"
           >{{goals.user.username}}</a
         >
+        <form
+          method="POST"
+          action="{{ url_for('views.delete_goal', goal_id=goals.id) }}"
+          style="display: inline"
+        >
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
       </div>
       <div class="card-body">
         <div class="card-text">{{goals.title}}</div>
