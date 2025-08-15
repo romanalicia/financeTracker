@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, abort
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import Goals
 from .models import Expense
@@ -52,6 +52,21 @@ def track_expenses():
     expenses = Expense.query.filter_by(user_id=current_user.id)\
         .order_by(Expense.date_created.desc()).all()
     return render_template("track_expenses.html", user=current_user, expenses=expenses)
+
+
+@views.route("/delete-expense/<int:expense_id>", methods=['POST'])
+@login_required
+def delete_expense(expense_id):
+    expense = Expense.query.get_or_404(expense_id)
+
+    # Only the owner can delete
+    if expense.user_id != current_user.id:
+        abort(403)
+
+    db.session.delete(expense)
+    db.session.commit()
+    flash("Expense deleted successfully!", "success")
+    return redirect(url_for("views.track_expenses"))
 
 
 @views.route("/goals-and-savings", methods=['GET', 'POST'])

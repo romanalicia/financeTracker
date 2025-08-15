@@ -68,6 +68,15 @@
       <td>{{ "%.2f"|format(expense.amount) }}</td>
       <td>{{ expense.description or "" }}</td>
       <td>{{ expense.date_created.strftime('%Y-%m-%d') }}</td>
+      <td>
+        <form
+          method="POST"
+          action="{{ url_for('views.delete_expense', expense_id=expense.id) }}"
+          style="display: inline"
+        >
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
