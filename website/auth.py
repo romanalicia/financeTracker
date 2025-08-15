@@ -1,6 +1,4 @@
-""" auth.py
-This file handles user authentication, including sign-up, login, and logout functionality.
-It uses Flask-Login for session management and SQLAlchemy for database interactions."""
+"""Handles user authentication functionality."""
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -17,7 +15,7 @@ auth = Blueprint("auth", __name__)
 # sign up function
 # returns sign up page
 def sign_up():
-    # signup function
+    """Signup function."""
     # returns signup page
     if request.method == 'POST':
         email = request.form.get("email")
@@ -42,8 +40,10 @@ def sign_up():
         elif len(email) < 4:
             flash('Email is not valid.', category='error')
         else:
-            new_user = User(email=email, username=username, password=generate_password_hash(
-                password1, method='scrypt:32768:8:1'))
+            new_user = User(email=email,
+                            username=username,
+                            password=generate_password_hash(
+                                password1, method='scrypt:32768:8:1'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -58,7 +58,7 @@ def sign_up():
 # login function
 # returns login page
 def login():
-    # gets email and password from login form
+    """Login function."""
     if request.method == 'POST':
         email = request.form.get("email")
         password = request.form.get("password")
@@ -88,5 +88,6 @@ def login():
 # logout function
 # returns logout page
 def logout():
+    """Logout function."""
     logout_user()
     return redirect(url_for('views.home'))

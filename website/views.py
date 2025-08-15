@@ -53,7 +53,8 @@ def track_expenses():
     # GET request: show all user's expenses
     expenses = Expense.query.filter_by(user_id=current_user.id)\
         .order_by(Expense.date_created.desc()).all()
-    return render_template("track_expenses.html", user=current_user, expenses=expenses)
+    return render_template("track_expenses.html",
+                           user=current_user, expenses=expenses)
 
 
 @views.route("/delete-expense/<int:expense_id>", methods=['POST'])
@@ -104,7 +105,8 @@ def goals_and_savings():
         return redirect(url_for('views.goals_and_savings'))
 
     author_goals = Goals.query.filter_by(author=current_user.id).all()
-    return render_template("goals-and-savings.html", user=current_user, goals=author_goals)
+    return render_template("goals-and-savings.html",
+                           user=current_user, goals=author_goals)
 
 
 @views.route("/delete-goal/<int:goal_id>", methods=['POST'])
